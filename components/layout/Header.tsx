@@ -86,12 +86,9 @@ export function Header() {
                         </div>
                     </details>
 
-                    <Link href="/offers" onClick={closeMenu}>
-                        Offers
-                    </Link>
 
-                    <Link href="/reviews" onClick={closeMenu}>
-                        Reviews
+                    <Link href="/about" onClick={closeMenu}>
+                        About Us
                     </Link>
 
                     <Link href="/contact" onClick={closeMenu}>

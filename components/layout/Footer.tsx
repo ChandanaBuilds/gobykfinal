@@ -39,7 +39,7 @@ export function Footer() {
                     <Link href="/">Home</Link>
                     <Link href="/bike-services">Bike services</Link>
                     <Link href="/car-services">Car services</Link>
-                    <Link href="/offers">Offers</Link>
+                    <Link href="/about">About Us</Link>
                 </div>
 
                 <div>

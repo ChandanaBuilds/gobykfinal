@@ -63,17 +63,17 @@ export function Hero() {
             {/* HERO STATISTICS */}
             <div className="hero-stats">
                 <div>
-                    <strong>4.9<span>★</span></strong>
+                    <strong>4.7<span>★</span></strong>
                     <small>Customer rating</small>
                 </div>
 
                 <div>
-                    <strong>25k<span>+</span></strong>
+                    <strong>72k<span>+</span></strong>
                     <small>Vehicles serviced</small>
                 </div>
 
                 <div>
-                    <strong>6</strong>
+                    <strong>7</strong>
                     <small>Centres in Hyderabad</small>
                 </div>
             </div>

@@ -30,13 +30,43 @@ const carServices = [
   'Car Body Shop',
 ]
 
+
 const locations = [
-  'Kondapur',
-  'Madhapur',
-  'Kukatpally',
-  'Banjara Hills',
-  'Secunderabad',
-  'Gachibowli',
+  {
+    name: 'GoByk Pragathinagar',
+    type: ' Car Service Centre',
+    url: 'https://maps.app.goo.gl/5gnFy3LDBDgAsVH1A',
+  },
+  {
+    name: 'GoByk KPHB',
+    type: 'Bike Service Centre',
+    url: 'https://maps.app.goo.gl/7SY9VDeUaV8czqUc6',
+  },
+  {
+    name: 'GoByk Kukatpally',
+    type: 'Bike Service Centre',
+    url: 'https://maps.app.goo.gl/dB87BYi5kDdZW7qr7',
+  },
+  {
+    name: 'GoByk Chandanagar',
+    type: 'Bike Service Centre',
+    url: 'https://maps.app.goo.gl/KoUAPWipTMX7tYgs6',
+  },
+  {
+    name: 'GoByk Gandimaisamma X Road',
+    type: 'Bike Service Centre',
+    url: 'https://maps.app.goo.gl/q2kHBK1CPYZs1NP97',
+  },
+  {
+    name: 'GoByk Kondapur',
+    type: 'Bike Service Centre',
+    url: 'https://maps.app.goo.gl/ujRQXfKUjZWGqh7u6',
+  },
+  {
+    name: 'GoByk Borabanda',
+    type: 'Bike & Car Service Centre',
+    url: 'https://maps.app.goo.gl/6cWKbQArpsdTxJmA9?g_st=ac',
+  },
 ]
 
 const testimonials = [
@@ -104,7 +134,13 @@ function ServiceCard({
                               ? '/service/9.png'
                               : title === 'Car Wash'
                                 ? '/service/10.png'
-                                : undefined}
+                                : title === 'Car Detailing'
+                                  ? '/service/11.png'
+                                  : title === 'Air Conditioning'
+                                    ? '/service/12.png'
+                                    : title === 'Car Body Shop'
+                                      ? '/service/13.png'
+                                      : undefined}
           alt={`${title} at GoByk`}
         />
 
@@ -159,9 +195,7 @@ function Home() {
             </span>
           </div>
 
-          <Link href="/offers">
-            View all offers <ArrowRight />
-          </Link>
+
         </section>
 
 
@@ -223,10 +257,11 @@ function Home() {
 
         {/* EDITORIAL LOCATIONS SECTION */}
 
+
         <section className="location-directory">
           <div className="location-directory-inner">
 
-            {/* LEFT INTRODUCTION */}
+            {/* LEFT STICKY INTRODUCTION */}
             <div className="location-directory-intro">
               <span className="eyebrow">
                 OUR LOCATIONS / HYDERABAD
@@ -239,60 +274,116 @@ function Home() {
               </h2>
 
               <p>
-                Wherever the road takes you, expert vehicle care
-                is always within reach. Find your nearest GoByk
-                service centre.
+                Expert vehicle care is always within reach.
+                Find your nearest GoByk service centre
+                and give your ride the care it deserves.
               </p>
-
-              <Link
-                href="/locations"
-                className="location-all-link"
-              >
-                Explore all locations
-                <ArrowRight size={18} />
-              </Link>
 
               <div className="location-directory-note">
                 <span className="location-live-dot" />
-                <span>Serving Hyderabad</span>
+                <span>7 Service Centres Across Hyderabad</span>
               </div>
+
+              <span className="location-scroll-hint">
+                SCROLL TO EXPLORE LOCATIONS
+                <ArrowRight size={16} />
+              </span>
             </div>
 
-            {/* RIGHT LOCATION DIRECTORY */}
+            {/* RIGHT STACKING LOCATION CARDS */}
             <div className="location-directory-list">
 
-              {locations.slice(0, 3).map((location, index) => (
-                <a
-                  href="#map"
-                  className="location-directory-item"
-                  key={location}
-                >
-                  <span className="location-directory-number">
-                    0{index + 1}
-                  </span>
+              {[
+                {
+                  name: 'GoByk Pragathinagar',
+                  type: 'Bike & Car Service Centre',
+                  url: 'https://maps.app.goo.gl/5gnFy3LDBDgAsVH1A',
+                  image: '/lo.png',
 
-                  <div className="location-directory-details">
-                    <span className="location-directory-city">
-                      HYDERABAD · TELANGANA
+                },
+                {
+                  name: 'GoByk KPHB',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/7SY9VDeUaV8czqUc6',
+                  image: '/lo.png',
+                },
+                {
+                  name: 'GoByk Kukatpally',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/dB87BYi5kDdZW7qr7',
+                  image: '/lo.png',
+                },
+                {
+                  name: 'GoByk Chandanagar',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/KoUAPWipTMX7tYgs6',
+                  image: '/lo.png',
+
+                },
+                {
+                  name: 'GoByk Gandimaisamma X Road',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/q2kHBK1CPYZs1NP97',
+                  image: '/lo.png',
+                },
+                {
+                  name: 'GoByk Kondapur',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/ujRQXfKUjZWGqh7u6',
+                  image: '/lo.png',
+
+                },
+                {
+                  name: 'GoByk Borabanda',
+                  type: 'Bike Service Centre',
+                  url: 'https://maps.app.goo.gl/6cWKbQArpsdTxJmA9?g_st=ac',
+                  image: '/lo.png',
+                },
+              ].map((location, index) => (
+
+                <a
+                  href={location.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="location-directory-item"
+                  key={location.name}
+                  style={{ zIndex: index + 1 }}
+                >
+                  <div className="location-card-content">
+                    <span className="location-directory-number">
+                      {String(index + 1).padStart(2, '0')}
                     </span>
 
-                    <h3>{location}</h3>
+                    <div className="location-directory-details">
+                      <span className="location-directory-city">
+                        HYDERABAD · TELANGANA
+                      </span>
 
-                    <p>
-                      {
-                        [
-                          'Kothaguda Main Road, Kondapur',
-                          '100 Feet Road, Madhapur',
-                          'Metro Pillar 789, Kukatpally',
-                        ][index]
-                      }
-                    </p>
+                      <h3>{location.name}</h3>
+
+                      <p>{location.type}</p>
+
+                      <span className="location-map-link">
+                        VIEW ON GOOGLE MAPS
+                        <ArrowRight size={16} />
+                      </span>
+                    </div>
+
+                    <span className="location-directory-arrow">
+                      <ArrowRight size={22} />
+                    </span>
                   </div>
 
-                  <span className="location-directory-arrow">
-                    <ArrowRight size={22} />
-                  </span>
+                  <div className="location-card-image">
+                    <img
+                      src={location.image}
+                      alt="GoByk Bike and Car Service Centre"
+                      loading="lazy"
+                    />
+                    <span>GOBYK SERVICE CENTRE</span>
+                  </div>
                 </a>
+
               ))}
 
               <div className="location-list-footer">
@@ -301,9 +392,9 @@ function Home() {
               </div>
 
             </div>
-
           </div>
         </section>
+
 
 
 
@@ -325,9 +416,9 @@ function Home() {
 
             <Link
               className="text-link dark"
-              href="/reviews"
+              href="/about"
             >
-              Read all reviews <ArrowRight />
+              About GoByk <ArrowRight />
             </Link>
           </div>
 
@@ -450,7 +541,7 @@ function Listing({
   const title =
     type === 'bike'
       ? 'Bike service, done right.'
-      : 'Car care without the guesswork.'
+      : 'Car care is available in PragathiNagar only.'
 
   return (
     <>
@@ -467,8 +558,9 @@ function Listing({
           <p>
             {type === 'bike'
               ? 'From everyday maintenance to complex repairs, keep your two-wheeler smooth, safe and ready for the road.'
-              : 'Everything your car needs to stay comfortable, safe and looking its best.'}
+              : 'Explore our complete range of car care services, available exclusively at our Pragathinagar service centre.'}
           </p>
+
         </section>
 
         <section className="section listing-section">
@@ -537,17 +629,13 @@ function GenericPage({
         'Find your nearest GoByk service centre in Hyderabad and give your ride the care it deserves.',
     },
 
-    reviews: {
-      title: 'Stories from the road.',
+    about: {
+      title: 'More than service. We care about your ride.',
       intro:
-        'Thousands of Hyderabad riders trust GoByk with the vehicles that keep life moving.',
+        'At GoByk, we believe every ride deserves reliable service, honest advice and expert care. We are here to make vehicle maintenance simple and convenient.',
     },
 
-    offers: {
-      title: 'More care. Less spend.',
-      intro:
-        'Thoughtful offers for first-time visitors and regular customers.',
-    },
+
 
     contact: {
       title: 'We are here to help.',
@@ -573,16 +661,55 @@ function GenericPage({
           <p>{pageData.intro}</p>
         </section>
 
-        {slug === 'reviews' ? (
-          <section className="section listing-section">
-            <div className="review-grid">
-              {testimonials
-                .concat(testimonials)
-                .map((testimonial, index) => (
-                  <article
-                    className="review-card"
-                    key={index}
-                  >
+
+
+        {slug === 'about' ? (
+          <section className="section about-page-section">
+            <div className="about-intro">
+              <span className="eyebrow">WHO WE ARE</span>
+              <h2>
+                Vehicle care built on <em>trust.</em>
+              </h2>
+              <p>
+                GoByk is committed to making bike and car servicing
+                convenient, transparent and reliable. From regular
+                maintenance to detailed repairs, our focus is on
+                quality workmanship and customer satisfaction.
+              </p>
+            </div>
+
+            <div className="about-values-grid">
+              <article>
+                <span>01</span>
+                <h3>Expert Care</h3>
+                <p>Dedicated vehicle care with attention to every detail.</p>
+              </article>
+
+              <article>
+                <span>02</span>
+                <h3>Honest Advice</h3>
+                <p>Clear communication and service recommendations.</p>
+              </article>
+
+              <article>
+                <span>03</span>
+                <h3>Customer First</h3>
+                <p>A convenient and dependable service experience.</p>
+              </article>
+            </div>
+
+            <div className="about-reviews">
+              <div className="about-reviews-heading">
+                <span className="eyebrow">CUSTOMER EXPERIENCES</span>
+                <h2>
+                  What our customers <em>say.</em>
+                </h2>
+                <p>Real experiences shared by customers who trust GoByk.</p>
+              </div>
+
+              <div className="review-grid">
+                {testimonials.map((testimonial) => (
+                  <article className="review-card" key={testimonial.name}>
                     <div className="stars">
                       ★★★★★ <span>{testimonial.rating}</span>
                     </div>
@@ -593,7 +720,6 @@ function GenericPage({
                       <div className="avatar">
                         {testimonial.name[0]}
                       </div>
-
                       <div>
                         <strong>{testimonial.name}</strong>
                         <small>{testimonial.meta}</small>
@@ -601,33 +727,88 @@ function GenericPage({
                     </div>
                   </article>
                 ))}
+              </div>
+            </div>
+          </section>
+
+        ) : slug === 'contact' ? (
+          <section className="section contact-page-section">
+            <div className="contact-page-heading">
+              <span className="eyebrow">LET'S CONNECT</span>
+              <h2>
+                We're just a <em>call away.</em>
+              </h2>
+              <p>
+                Need help with a booking or vehicle service?
+                Get in touch with our team.
+              </p>
+            </div>
+
+            <div className="contact-page-grid">
+              <a href="tel:+918639741212" className="contact-info-card">
+                <MapPin size={25} />
+                <span>CALL OUR TEAM</span>
+                <h3>+91 86397 41212</h3>
+                <p>Speak with our service team</p>
+                <ArrowRight />
+              </a>
+
+              <a href="mailto:cc@gobyk.in" className="contact-info-card">
+                <MapPin size={25} />
+                <span>EMAIL US</span>
+                <h3>cc@gobyk.in</h3>
+                <p>Send us your questions and enquiries</p>
+                <ArrowRight />
+              </a>
             </div>
           </section>
         ) : (
-          <section className="section listing-section">
-            <div className="location-grid full">
+          <section className="section listing-section locations-page-section">
+            <div className="locations-page-heading">
+              <div>
+                <span className="eyebrow">OUR SERVICE NETWORK</span>
+                <h2>
+                  Find your nearest <em>GoByk.</em>
+                </h2>
+              </div>
+              <p>
+                Seven convenient service centres across Hyderabad.
+                Choose your nearest location and get directions.
+              </p>
+            </div>
+
+            <div className="locations-premium-grid">
               {locations.map((location, index) => (
-                <div
-                  className="location-card light-card"
-                  key={location}
-                >
-                  <div className="location-top">
-                    <span>0{index + 1}</span>
-                    <MapPin />
+                <article className="location-premium-card" key={location.name}>
+                  <div className="location-premium-image">
+                    <img
+                      src="/lo.png"
+                      alt="GoByk bike and car service centre"
+                      loading="lazy"
+                    />
+                    <span className="location-premium-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="location-premium-tag">HYDERABAD</span>
                   </div>
 
-                  <h3>{location} service centre</h3>
-
-                  <p>
-                    Open daily · 8:00 AM–8:00 PM
-                    <br />
-                    {index + 12}, Hyderabad, Telangana
-                  </p>
-
-                  <a href="#map">
-                    Get directions <ArrowRight />
-                  </a>
-                </div>
+                  <div className="location-premium-content">
+                    <span className="location-premium-label">
+                      <MapPin size={15} />
+                      GOBYK SERVICE CENTRE
+                    </span>
+                    <h3>{location.name}</h3>
+                    <p>{location.type}</p>
+                    <a
+                      href={location.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="location-premium-link"
+                    >
+                      Get directions <ArrowRight size={18} />
+                    </a>
+                  </div>
+                </article>
               ))}
             </div>
           </section>

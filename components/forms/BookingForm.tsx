@@ -8,6 +8,8 @@ import { BOOKING_EVENT } from './booking-event'
 export function BookingForm() {
     const [isOpen, setIsOpen] = useState(false)
     const [submitted, setSubmitted] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitError, setSubmitError] = useState('')
 
     useEffect(() => {
         const handleOpen = () => {
@@ -40,10 +42,55 @@ export function BookingForm() {
 
     if (!isOpen) return null
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        setSubmitted(true)
+
+        if (isSubmitting) return
+
+        setIsSubmitting(true)
+        setSubmitError('')
+
+        const formData = new FormData(e.currentTarget)
+
+        const bookingData = {
+            name: String(formData.get('name') || '').trim(),
+            phone: String(formData.get('phone') || '').trim(),
+            email: String(formData.get('email') || '').trim(),
+            vehicleType: String(formData.get('vehicleType') || ''),
+        }
+
+        const scriptUrl =
+            process.env.NEXT_PUBLIC_GOBYK_BOOKING_SCRIPT_URL
+
+        if (!scriptUrl) {
+            setSubmitError('Booking service is not configured. Please try again later.')
+            setIsSubmitting(false)
+            return
+        }
+
+        try {
+            await fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(bookingData),
+            })
+
+            setSubmitted(true)
+            e.currentTarget.reset()
+        } catch (error) {
+            console.error('Booking submission error:', error)
+            setSubmitError(
+                'Unable to send your booking. Please try again or call us.'
+            )
+        } finally {
+            setIsSubmitting(false)
+        }
     }
+
 
     return (
         <div
@@ -182,10 +229,17 @@ export function BookingForm() {
                             <button
                                 type="submit"
                                 className="booking-submit-btn"
+                                disabled={isSubmitting}
                             >
-                                Submit Details
-                                <Send size={16} />
+                                {isSubmitting ? 'Submitting...' : 'Submit Details'}
+                                {!isSubmitting && <Send size={16} />}
                             </button>
+
+                            {submitError && (
+                                <p className="booking-error" role="alert">
+                                    {submitError}
+                                </p>
+                            )}
 
                             <p className="booking-privacy">
                                 Your details will only be used for your booking.
